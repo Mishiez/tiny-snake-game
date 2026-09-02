@@ -94,3 +94,14 @@ function drawFood() {
   ctx.fillStyle = '#e53935';
   ctx.fillRect(food.x * GRID_SIZE, food.y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
 }
+
+function resetGame() {
+  gameOver = false;
+  score = 0;
+  snake = [{ x: 10, y: 10 }];
+  direction = { x: 0, y: 0 };
+  document.getElementById('game-over').style.display = 'none';
+  gameLoop = setInterval(tick, 100);
+}
+
+document.getElementById('restart-btn').addEventListener('click', resetGame);
