@@ -10,3 +10,10 @@ body {
   background: #fff;
   border: 2px solid #333;
 }
+
+#score {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+}

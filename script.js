@@ -39,9 +39,18 @@ document.addEventListener('keydown', (e) => {
 function tick() {
   const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
   snake.unshift(head);
-  snake.pop();
+
+  if (head.x === food.x && head.y === food.y) {
+    score++;
+    document.getElementById('score').textContent = `Score: ${score}`;
+    food = spawnFood();
+  } else {
+    snake.pop();
+  }
+
   draw();
   drawSnake();
+  drawFood();
 }
 
 function drawSnake() {
@@ -52,3 +61,18 @@ function drawSnake() {
 let gameLoop = setInterval(tick, 100);
 
 //Trying squash 
+
+let food = spawnFood();
+let score = 0;
+
+function spawnFood() {
+  return {
+    x: Math.floor(Math.random() * TILE_COUNT),
+    y: Math.floor(Math.random() * TILE_COUNT)
+  };
+}
+
+function drawFood() {
+  ctx.fillStyle = '#e53935';
+  ctx.fillRect(food.x * GRID_SIZE, food.y * GRID_SIZE, GRID_SIZE, GRID_SIZE);
+}
