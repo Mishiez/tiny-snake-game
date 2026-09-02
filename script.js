@@ -50,3 +50,5 @@ function drawSnake() {
 }
 
 let gameLoop = setInterval(tick, 100);
+
+//Trying squash 
