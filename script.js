@@ -26,6 +26,7 @@ draw();
 
 let snake = [{ x: 10, y: 10 }];
 let direction = { x: 0, y: 0 };
+let gameOver = false;
 
 document.addEventListener('keydown', (e) => {
   switch (e.key) {
@@ -37,6 +38,11 @@ document.addEventListener('keydown', (e) => {
 });
 
 function tick() {
+  if (checkCollision()) {
+    endGame();
+    return;
+  }
+  
   const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
   snake.unshift(head);
 
@@ -51,6 +57,18 @@ function tick() {
   draw();
   drawSnake();
   drawFood();
+}
+function checkCollision() {
+  const head = snake[0];
+  const hitWall = head.x < 0 || head.y < 0 || head.x >= TILE_COUNT || head.y >= TILE_COUNT;
+  const hitSelf = snake.slice(1).some(seg => seg.x === head.x && seg.y === head.y);
+  return hitWall || hitSelf;
+}
+
+function endGame() {
+  gameOver = true;
+  clearInterval(gameLoop);
+  document.getElementById('game-over').style.display = 'block';
 }
 
 function drawSnake() {

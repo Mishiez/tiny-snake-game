@@ -17,3 +17,10 @@ body {
   font-weight: bold;
   color: #333;
 }
+
+#game-over {
+  margin-top: 10px;
+  font-size: 1.5rem;
+  color: #e53935;
+  font-weight: bold;
+}
